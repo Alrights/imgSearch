@@ -1,0 +1,20 @@
+          <h4><a href="">简介</a></h4>
+          <p>深度学习demo：使用GoogleNet，Faster-RCNN，Neuraltalk2制作的计算机视觉应用小程序（分类，目标识别，Image Caption和图像检索）.</p>
+
+          <h4><a href="">图像分类</a></h4>
+          <p>图像分类，根据各自在图像信息中所反映的不同特征，把不同类别的目标区分开来的图像处理方法。它利用计算机对图像进行定量分析，把图像或图像中的每个像元或区域划归为若干个类别中的某一种，以代替人的视觉判读.</p>
+
+          <h4><a href="http://192.168.116.133:5000">目标检测</a></h4>
+          <p>目标检测，也叫目标提取，是一种基于目标几何和统计特征的图像分割，它将目标的分割和识别合二为一，其准确性和实时性是整个系统的一项重要能力。尤其是在复杂场景中，需要对多个目标进行实时处理时，目标自动提取和识别就显得特别重要.</p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4><a href="">Image Caption</a></h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+          <h4><a href="">图像检索</a></h4>
+          <p>使用图像的颜色、纹理、布局等进行分析和检索的图像检索技术，即基于内容的图像检索（Content-based Image Retrieval，简称CBIR）技术。CBIR属于基于内容检索（Content-based Retrieval，简称CBR）的一种，CBR中还包括对动态视频、音频等其它形式多媒体信息的检索技术.</p>
+
+          <h4><a href="">About US</a></h4>
+          <p>北京科技大学机器人与物联网实验室.</p>
+        </div>

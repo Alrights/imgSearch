@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Deep Learning">
+
+    <title>Deep Learning</title>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/st.css" rel="stylesheet">
+    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.1.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <!-- Script to instantly classify an image once it is uploaded. -->
+    <script type="text/javascript">
+      $(document).ready(
+        function(){
+          $('#classifyfile').attr('disabled',true);
+          $('#imagefile').change(
+            function(){
+              if ($(this).val()){
+                $('#formupload').submit();
+              }
+            }
+          );
+        }
+      );
+    </script>
+
+    <style>
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      line-height:1.5em;
+      color: #232323;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      font-family: Times, serif;
+      line-height:1.5em;
+      border-bottom: 1px solid #ccc;
+    }
+
+    </style>
+  </head>
+
+  <body>
+    <!-- Begin page content -->
+   <nav class="navbar navbar-default navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapse" ></button>
+			<a class="navbar-brand" href="project.html">Project</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+			<form class="navbar-form navbar-right">
+				<div class="form-group">
+					<input type="text" placeholder="Email" class="form-control">
+				</div>
+				<div class="form-group">
+					<input type="password" placeholder="Password" class="form-control">				</div>
+				<button type="submit" class="btn btn-success">Sign in</button>
+			</form>
+		</div>
+	</div>
+</nav>
+<div class="container-fluid">
+    	<div class="container" style="margin-top:60px">
+      <div class="page-header">
+        <h1><a href="/">Deep Learning</a></h1>
+        <p>
+          Version:1.0</br>
+	  Author:Tianyu Sang</br>
+	  Laboratory:Robot and IOT in EE
+	  College:USTB</br>
+        </p>
+      </div>
+
+      <div>
+        <h2>Classification</h2>
+      </div>
+
+      {% if has_result %}
+      {% if not result[0] %}
+      <!-- we have error in the result. -->
+      <div class="alert alert-danger">{{ result[1] }} Did you provide a valid URL or a valid image file? </div>
+      {% else %}
+      <div class="media">
+        <a class="pull-left" href="#"><img class="media-object" width="192" height="192" src={{ imagesrc }}></a>
+        <div class="media-body">
+          <div class="bs-example bs-example-tabs">
+            <ul id="myTab" class="nav nav-tabs">
+              <li class="active"><a href="#infopred" data-toggle="tab">Maximally accurate</a></li>
+              <li><a href="#flatpred" data-toggle="tab">Maximally specific</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div class="tab-pane fade in active" id="infopred">
+                <ul class="list-group">
+                  {% for single_pred in result[2] %}
+                  <li class="list-group-item">
+                  <span class="badge">{{ single_pred[1] }}</span>
+                  <h4 class="list-group-item-heading">
+                    <a href="https://www.google.com/#q={{ single_pred[0] }}" target="_blank">{{ single_pred[0] }}</a>
+                  </h4>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div class="tab-pane fade" id="flatpred">
+                <ul class="list-group">
+                  {% for single_pred in result[1] %}
+                  <li class="list-group-item">
+                  <span class="badge">{{ single_pred[1] }}</span>
+                  <h4 class="list-group-item-heading">
+                    <a href="https://www.google.com/#q={{ single_pred[0] }}" target="_blank">{{ single_pred[0] }}</a>
+                  </h4>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      {% endif %}
+      {% else %}
+      <div class="row marketing">
+        <div class="col-lg-6">
+          <h4>Subheading</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+          <h4>Subheading</h4>
+          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+          <h4>Subheading</h4>
+          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4>Subheading</h4>
+          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+          <h4>Subheading</h4>
+          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+          <h4>Subheading</h4>
+          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+        </div>
+      </div>
+      <hr>
+      {% endif %}
+      <form id="formupload" class="form-inline" role="form" action="classify_upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="imagefile">Or upload an image:</label>
+          <input type="file" name="imagefile" id="imagefile">
+        </div>
+        <!--<input type="submit" class="btn btn-primary" value="Classify File" id="classifyfile"></input>-->
+      </form>
+    </div>
+   <nav class="navbar navbar-default navbar-fixed-bottom">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapse" ></button>
+			<a class="navbar-brand" href="#">单位：北京科技大学</a>
+		</div>
+		<div id="navba" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">院系：计算机与通信工程学院</a></li>
+				<li><a href="#">实验室：电子与通信工程物联网与机器人研究室</a></li>
+				<li><a href="#">制作人：桑天雨</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+ </body>
+</html>
